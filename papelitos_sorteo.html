@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Papelitos Sorteo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial Black, Arial, sans-serif;
+    background: #e0e0e0;
+    padding: 16px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .screen-hint { display: none; }
+  }
+
+  .screen-hint {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .page {
+    width: 216mm;
+    min-height: 279mm;
+    background: white;
+    margin: 0 auto 20px;
+    padding: 6mm;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  @media print {
+    .page {
+      margin: 0;
+      padding: 5mm;
+      width: 100%;
+      min-height: 0;
+      height: calc(100vh - 0mm);
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+  }
+
+  .slip {
+    border: 1.5px dashed #bbb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 6px;
+    gap: 6px;
+    text-align: center;
+    position: relative;
+    min-height: 62mm;
+  }
+
+  /* WINNER */
+  .slip.win {
+    background: #F7DC4B;
+    border-color: #c9b200;
+  }
+  .slip.win .icon { font-size: 36px; line-height: 1; }
+  .slip.win .msg {
+    font-size: 13px;
+    font-weight: 900;
+    color: #121755;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .slip.win .tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: #121755;
+    opacity: 0.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* LOSER */
+  .slip.lose {
+    background: #fff;
+  }
+  .slip.lose .icon {
+    font-size: 34px;
+    color: #cc2222;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .slip.lose .msg {
+    font-size: 13px;
+    font-weight: 900;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .slip.lose .tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Página 2 tiene 13 slips: 3×4 + 1 => última fila ocupa todo el ancho */
+  .page2 { grid-template-rows: repeat(5, 1fr); }
+  .page2 .slip:nth-child(13) {
+    grid-column: 1 / 4;
+    min-height: 50mm;
+  }
+</style>
+</head>
+<body>
+
+<p class="screen-hint">Imprimir en carta · Cortar por las líneas punteadas · 5 papelitos con premio (amarillo), 20 sin premio (blanco)</p>
+
+<!-- PÁGINA 1: 12 papelitos -->
+<div class="page">
+
+  <div class="slip win">
+    <div class="icon">🏆</div>
+    <div class="msg">¡Gané ctm!<br>Me rajé</div>
+    <div class="tag">★ PREMIO ★</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Perkin</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Perdí ctm</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Loser</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip win">
+    <div class="icon">🏆</div>
+    <div class="msg">Soy un<br>ganador</div>
+    <div class="tag">★ PREMIO ★</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Tengo<br>mala cuea</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Eliminado<br>en 1ra ronda</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Qué<br>vergüenza</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip win">
+    <div class="icon">🏆</div>
+    <div class="msg">¡Premio baby!<br>Aguante España</div>
+    <div class="tag">★ PREMIO ★</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Nunca más<br>apuesto</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Me quedé<br>sin nada</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Me cagué<br>solito</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+</div>
+
+<!-- PÁGINA 2: 13 papelitos -->
+<div class="page page2">
+
+  <div class="slip win">
+    <div class="icon">🏆</div>
+    <div class="msg">¡Me lo<br>merezco!</div>
+    <div class="tag">★ PREMIO ★</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">El año que<br>viene gano</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">La próxima<br>me rajo</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Sigo<br>siendo yo</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Tan cerca,<br>tan lejos</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip win">
+    <div class="icon">🏆</div>
+    <div class="msg">¡La rompí!<br>Tráiganme el premio</div>
+    <div class="tag">★ PREMIO ★</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Fue mala<br>suerte nomás</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Sin ojo<br>pa la pelota</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Volveré<br>más fuerte</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">El sorteo<br>me odia</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">No era<br>mi torneo</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">Apaguen<br>las luces</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+  <!-- último ocupa fila completa -->
+  <div class="slip lose">
+    <div class="icon">✕</div>
+    <div class="msg">No vine a perder pero igual perdí</div>
+    <div class="tag">sin suerte</div>
+  </div>
+
+</div>
+
+</body>
+</html>
